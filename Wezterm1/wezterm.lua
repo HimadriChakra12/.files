@@ -9,19 +9,18 @@ wezterm.on("update-right-status", function(window, pane)
 	end
 	window:set_right_status(name or "")
 end)
+
 return {
-  default_cursor_style = "BlinkingBlock",
-  colors = {
-    background = "#282828", -- Gruvbox dark background
-    foreground = "#ebdbb2", -- Gruvbox dark foreground
-    cursor_bg = "#d4be98",
-    cursor_fg = "#282828",
-    ansi = { "#282828", "#cc241d", "#98971a", "#d79921", "#458588", "#b16286", "#689d6a", "#a89984" },
-    brights = { "#928374", "#fb4934", "#b8bb26", "#fabd2f", "#83a598", "#d3869b", "#8ec07c", "#ebdbb2" },
-  },
+	default_cursor_style = "BlinkingBlock",
+	color_scheme = "Poimandres",
+	colors = {
+		cursor_bg = "#A6ACCD",
+		cursor_border = "#A6ACCD",
+		cursor_fg = "#1B1E28",
+	},
 	-- font
 	font = wezterm.font("JetBrains Mono", { weight = "Medium" }),
-	font_size = 9,
+	font_size = 10,
 	line_height = 1,
 	window_background_opacity = 0.98,
 	-- tab bar
@@ -46,4 +45,3 @@ return {
 	keys = mappings.keys,
 	key_tables = mappings.key_tables,
 }
-

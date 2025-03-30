@@ -14,3 +14,5 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("n", "<Leader>w", ":w<CR>", opts)
 keymap("n", "<Leader>q", ":q<CR>", opts)
 keymap("n", "<Leader>x", ":x<CR>", opts)
+
+vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { noremap = true, silent = true })

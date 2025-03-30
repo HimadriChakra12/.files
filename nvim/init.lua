@@ -1,14 +1,8 @@
 require("plugins.zoxvim")
 require("plugins.ff")
-require("Stateline")
 require("keybindings")
-
--- TP BG
-vim.cmd([[highlight Normal guibg=NONE ctermbg=NONE]])
-vim.cmd([[highlight NonText guibg=NONE ctermbg=NONE]])
-vim.cmd([[highlight NormalNC guibg=NONE ctermbg=NONE]])
-vim.cmd([[highlight EndOfBuffer guibg=NONE ctermbg=NONE]])
-
+require("statusline.theme")
+require("statusline.style")
 -- Line Numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -34,8 +28,6 @@ vim.opt.softtabstop = 4
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
-
-
 -- No Annoy
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -49,4 +41,13 @@ vim.cmd [[
   augroup END
 ]]
 
-vim.cmd("colorscheme desert")  -- Replace 'desert' with any available scheme
+-- TP BG
+-- vim.cmd([[highlight Normal guibg=NONE ctermbg=NONE]])
+-- vim.cmd([[highlight NonText guibg=NONE ctermbg=NONE]])
+-- vim.cmd([[highlight NormalNC guibg=NONE ctermbg=NONE]])
+-- vim.cmd([[highlight EndOfBuffer guibg=NONE ctermbg=NONE]])
+
+vim.opt.termguicolors = true  -- Enable 24-bit colors
+vim.opt.background = "dark"   -- Set to dark mode
+vim.cmd("colorscheme gruvbox")  -- Load Gruvbox
+
