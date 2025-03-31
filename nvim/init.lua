@@ -3,10 +3,11 @@ require("plugins.ff")
 require("keybindings")
 require("statusline.theme")
 require("statusline.style")
+require("startup")
 -- Line Numbers
 vim.opt.number = true
+vim.opt.fillchars = { eob = " " }
 vim.opt.relativenumber = true
-
 
 -- Better searching
 vim.opt.incsearch = true
