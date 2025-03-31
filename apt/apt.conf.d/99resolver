@@ -1,6 +1,0 @@
-
-APT::Get::Fix-Broken "true";
-APT::Get::Show-Upgraded "true";
-APT::Immediate-Configure "true";
-APT::Force-LoopBreak "false";
-APT::Get::Assume-Yes "true";

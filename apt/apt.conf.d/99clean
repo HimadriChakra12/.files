@@ -1,9 +1,0 @@
-
-APT::Periodic::Enable "1";
-APT::Periodic::AutocleanInterval "1";
-APT::Periodic::Unattended-Upgrade "1";
-APT::Get::Show-Upgraded "true";
-APT::Get::Fix-Broken "true";
-APT::Get::Purge "true";
-APT::Immediate-Configure "true";
-APT::Force-LoopBreak "true";

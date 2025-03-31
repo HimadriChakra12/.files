@@ -1,5 +1,0 @@
-
-Acquire::http {No-Cache "true";};
-Acquire::https {No-Cache "true";};
-Acquire::Languages "none";
-Acquire::CompressionTypes::Order { "gz"; "bz2"; "xz"; };
