@@ -1,9 +1,15 @@
 require("plugins.zoxvim")
 require("plugins.ff")
+require("plugins.cmp")
 require("keybindings")
 require("statusline.theme")
 require("statusline.style")
 require("startup")
+require("tree")
+require("scope")
+vim.keymap.set('n', '<leader>ff', function() require('scope').find_files_and_display() end)
+vim.keymap.set('n', '<leader>fh', function() require('scope').find_files_and_display({ hidden = true }) end)
+vim.keymap.set('n', '<leader>fp', function() require('scope').find_files_and_display({ pattern = "*.py" }) end)
 -- Line Numbers
 vim.opt.number = true
 vim.opt.fillchars = { eob = " " }
@@ -52,3 +58,10 @@ vim.opt.termguicolors = true  -- Enable 24-bit colors
 vim.opt.background = "dark"   -- Set to dark mode
 vim.cmd("colorscheme gruvbox")  -- Load Gruvbox
 
+-- pwsh
+vim.opt.shell = "pwsh.exe"
+vim.opt.shellcmdflag = "-NoLogo -ExecutionPolicy Bypass -Command"
+vim.opt.shellredir = ">%s 2>&1"
+vim.opt.shellpipe = "| pwsh.exe -NoLogo -ExecutionPolicy Bypass -Command"
+vim.opt.shellquote = "\""
+vim.opt.shellxquote = "\""

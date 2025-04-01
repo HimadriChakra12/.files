@@ -29,5 +29,5 @@ vim.opt.laststatus = 2
 vim.opt.ruler = true
 
 -- style
-vim.opt.statusline = "Him/%f %= %#LineNr# %y %p%% %#StatusLineMode#" .. get_git_branch() .. get_git_status() ..  "%#StatusLine# [%L:%c]"
+vim.opt.statusline = "Him[%f] %= %#LineNr# %y %p%% %#StatusLineMode#" .. get_git_branch() .. get_git_status() ..  "%#StatusLine# [%L:%c]"
 
