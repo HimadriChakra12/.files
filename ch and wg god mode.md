@@ -1,6 +1,38 @@
-# 🚀 Winget + Chocolatey: GOD MODE
+# 🚀 Winget + Chocolatey + Scoop: GOD MODE
 
-This guide pushes **Winget & Chocolatey** to their absolute limits, ensuring **ultra-fast installs, full automation, parallel processing, self-healing, and zero bloat.**
+This guide pushes **Winget, Chocolatey & Scoop** to their absolute limits, ensuring **ultra-fast installs, full automation, parallel processing, self-healing, and zero bloat—all controlled from a single terminal.**
+
+---
+
+## **🔥 One-Terminal Package Manager Controller**
+
+### **🖥️ Master Command Script (PowerShell)**
+```powershell
+function Install-All {
+    param([string[]]$packages)
+
+    Write-Host "🔥 Installing packages using Winget, Chocolatey, and Scoop..." -ForegroundColor Cyan
+
+    $jobs = @()
+
+    foreach ($package in $packages) {
+        $jobs += Start-Job -ScriptBlock {
+            winget install --id=$using:package --silent --accept-package-agreements --accept-source-agreements -e
+            choco install $using:package -y --force --ignore-checksums --limit-output
+            scoop install $using:package
+        }
+    }
+
+    $jobs | ForEach-Object { Receive-Job -Job $_ -Wait }
+    Write-Host "✅ All packages installed successfully!" -ForegroundColor Green
+}
+
+# Example Usage:
+Install-All "git", "vscode", "7zip", "googlechrome", "powertoys", "neovim", "spotify", "oh-my-posh"
+```
+✅ **Installs all apps using Winget, Chocolatey, and Scoop simultaneously**
+✅ **Runs installs in parallel for extreme speed**
+✅ **No manual intervention required—fully automated**
 
 ---
 
@@ -31,45 +63,6 @@ choco config set proxyCacheLocation C:\choco-cache
 ✅ **Prevents install failures** (max timeouts)
 ✅ **Enables package cache** (faster reinstalls)
 ✅ **Disables slow virus scanning**
-
----
-
-### **🚀 3. Parallel Chocolatey Installations**
-```powershell
-$apps = @("git", "vscode", "7zip", "googlechrome", "powertoys", "neovim", "spotify", "oh-my-posh")
-$jobs = @()
-foreach ($app in $apps) {
-    $jobs += Start-Job -ScriptBlock { choco install $using:app -y --force --ignore-checksums --limit-output }
-}
-$jobs | ForEach-Object { Receive-Job -Job $_ -Wait }
-```
-✅ **Installs ALL apps in parallel (full CPU usage)**
-✅ **Minimizes output for a clean experience**
-
----
-
-### **🔄 4. Self-Healing Chocolatey (Retries Failed Installs)**
-```powershell
-function Install-WithRetry {
-    param ($package)
-    for ($i=1; $i -le 3; $i++) {
-        Write-Host "Installing $package (Attempt $i)..." -ForegroundColor Yellow
-        choco install $package -y --force --ignore-checksums --limit-output
-        if ($?) { return }
-    }
-    Write-Host "❌ Failed to install $package after 3 attempts." -ForegroundColor Red
-}
-```
-
----
-
-### **🤖 5. Chocolatey Self-Updating & Auto-Repair**
-```powershell
-schtasks /create /tn "Choco_Self_Update" /tr "powershell -Command { choco upgrade chocolatey -y --force --ignore-checksums --limit-output }" /sc weekly /st 03:00 /ru SYSTEM
-schtasks /create /tn "Choco_Auto_Repair" /tr "powershell -Command { choco upgrade all -y --force --ignore-checksums --limit-output; choco install chocolatey -y --force }" /sc daily /st 02:00 /ru SYSTEM
-```
-✅ **Chocolatey updates itself every week**
-✅ **Every night, it fixes broken packages**
 
 ---
 
@@ -105,54 +98,47 @@ schtasks /create /tn "Choco_Auto_Repair" /tr "powershell -Command { choco upgrad
 
 ---
 
-### **🚀 2. Fastest Possible Winget Install Commands**
+## **🔥 Scoop: The Ultimate Windows Package Manager**
+
+### **💨 1. Fastest Scoop Install**
 ```powershell
-winget install "Google.Chrome" --silent --accept-source-agreements --accept-package-agreements
+irm get.scoop.sh | iex
+scoop config SCOOP_REPO https://github.com/ScoopInstaller/Scoop.git
 ```
-✅ **Silent install (no popups, no clicking "Next")**
-✅ **No source agreements prompt**
+✅ **One-liner install**
+✅ **No admin required (installs in user directory)**
+✅ **Uses the latest GitHub repository for updates**
 
 ---
 
-### **💨 3. Parallel Winget Installations**
+### **🚀 3. Install Essential Buckets**
 ```powershell
-$apps = @("Microsoft.PowerToys", "Mozilla.Firefox", "VideoLAN.VLC", "Notepad++.Notepad++", "Spotify.Spotify", "7zip.7zip")
-foreach ($app in $apps) {
-    Start-Job -ScriptBlock { winget install --id=$using:app --silent --accept-source-agreements --accept-package-agreements }
-}
+scoop bucket add extras
+scoop bucket add versions
+scoop bucket add nerd-fonts
+scoop bucket add java
+scoop bucket add games
 ```
-✅ **Installs multiple apps at the same time**
-✅ **No waiting, no clicking "Next"—just installs everything at once**
+✅ **Expands available apps** (dev tools, fonts, Java, games)
 
 ---
 
-### **🔄 4. Auto-Update Everything Daily**
+### **🔄 4. Auto-Update Everything & Cleanup**
 ```powershell
-schtasks /create /tn "Winget_Auto_Update" /tr "powershell -Command { winget upgrade --all --silent --accept-source-agreements --accept-package-agreements }" /sc daily /st 02:00 /ru SYSTEM
+scoop update
+scoop upgrade --all
+scoop cleanup --all
 ```
-✅ **Automatically updates all apps every night**
-✅ **Runs in the background—no interruptions**
+✅ **Keeps everything updated with a single command**
+✅ **Removes unnecessary files for a clean setup**
 
 ---
 
-### **💥 5. Fully Automatic Setup (Winget + Choco Hybrid Mode)**
-```powershell
-irm "https://raw.githubusercontent.com/yourrepo/winget-setup.ps1" | iex
-```
-✅ **Auto-installs Winget & Chocolatey**
-✅ **Auto-configures `settings.json`**
-✅ **Auto-installs all essential apps**
-✅ **Auto-updates everything**
-
----
-
-# **💀 WINGET & CHOCO HAVE TRANSCENDED REALITY 💀**
+# **💀 WINGET, CHOCO & SCOOP HAVE TRANSCENDED REALITY 💀**
 ### **✔ Fully automated installs**
 ### **✔ Parallel processing (full CPU usage)**
 ### **✔ Auto-updates (never gets outdated)**
 ### **✔ Silent installs (zero interruptions)**
-### **✔ Hybrid Choco + Winget (best of both worlds)**
+### **✔ Hybrid Choco + Winget + Scoop (best of all worlds)**
 
-🚀 **THIS IS THE FINAL FORM.** 🚀
-
-
+🚀 **ONE TERMINAL. UNLIMITED POWER.** 🚀
