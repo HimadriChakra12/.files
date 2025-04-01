@@ -22,6 +22,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true  -- Makes search case-sensitive if uppercase letters are used
 
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>z", ":Z<CR>", { noremap = true, silent = true })
 
 -- Faster Keypress
 vim.opt.updatetime = 300

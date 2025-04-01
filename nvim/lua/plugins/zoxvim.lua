@@ -30,6 +30,10 @@ end
 
 -- Add directory to history
 local function add_to_history(dir)
+  -- Normalize the directory path
+  dir = vim.fn.fnamemodify(dir, ":p")
+  dir = dir:gsub("/$", "") -- Remove trailing slash
+  
   local found = false
   for i, d in ipairs(history) do
     if d == dir then
@@ -54,21 +58,28 @@ end
 
 -- Fuzzy find and jump
 local function jump(query)
-  print("Query: " .. query) -- Inspect the query
+  query = query or ""
   local results = {}
-  for _, dir in ipairs(history) do
-    if vim.fn.match(dir, query) ~= -1 then
-      table.insert(results, dir)
+  
+  -- If no query provided, show all history
+  if query == "" then
+    results = history
+  else
+    -- Simple fuzzy matching (case insensitive)
+    local pattern = query:gsub(".", function(c) return ".*" .. c:lower() end)
+    for _, dir in ipairs(history) do
+      local dir_lower = dir:lower()
+      if dir_lower:find(pattern) or dir_lower:find(query:lower(), 1, true) then
+        table.insert(results, dir)
+      end
     end
   end
 
-  print(vim.inspect(results)) -- Inspect fuzzy finding results
-
   if #results == 0 then
+    -- Try expanding the query as a direct path
     local expanded_query = vim.fn.expand(query)
-    print("Expanded Query: " .. expanded_query) -- Inspect the expanded query
     if vim.fn.isdirectory(expanded_query) == 1 then
-      vim.cmd("cd " .. vim.fn.shellescape(expanded_query))
+      vim.cmd("cd " .. vim.fn.fnameescape(expanded_query))
       add_to_history(expanded_query)
     else
       vim.notify("No matching directories found in history or as a direct directory.", vim.log.levels.WARN)
@@ -77,23 +88,19 @@ local function jump(query)
   end
 
   if #results == 1 then
-    local expanded_path = vim.fn.expand(results[1])
-    if vim.fn.isdirectory(expanded_path) == 1 then
-      vim.cmd("cd " .. vim.fn.shellescape(expanded_path))
-      add_to_history(expanded_path)
-    else
-      vim.notify("Invalid directory: " .. expanded_path, vim.log.levels.ERROR)
-    end
+    local selected = results[1]
+    vim.cmd("cd " .. vim.fn.fnameescape(selected))
+    add_to_history(selected)
   else
-    vim.ui.select(results, { prompt = "Select directory to jump to:" }, function(choice)
+    vim.ui.select(results, {
+      prompt = "Select directory to jump to:",
+      format_item = function(item)
+        return vim.fn.fnamemodify(item, ":~")
+      end,
+    }, function(choice)
       if choice then
-        local expanded_path = vim.fn.expand(choice)
-        if vim.fn.isdirectory(expanded_path) == 1 then
-          vim.cmd("cd " .. vim.fn.shellescape(expanded_path))
-          add_to_history(expanded_path)
-        else
-          vim.notify("Invalid directory: " .. expanded_path, vim.log.levels.ERROR)
-        end
+        vim.cmd("cd " .. vim.fn.fnameescape(choice))
+        add_to_history(choice)
       end
     end)
   end
@@ -101,8 +108,8 @@ end
 
 -- Nvim command to jump
 vim.api.nvim_create_user_command("Z", function(args)
-  jump(args.fargs[1] or "")
-end, { nargs = "?" })
+  jump(args.args)
+end, { nargs = "?", complete = "dir" })
 
 -- Automatically add current directory to history on VimEnter and DirChanged
 vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged" }, {
