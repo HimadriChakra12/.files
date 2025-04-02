@@ -28,26 +28,33 @@ local function save_history()
   end
 end
 
--- Add directory to history
-local function add_to_history(dir)
-  -- Normalize the directory path
-  dir = vim.fn.fnamemodify(dir, ":p")
-  dir = dir:gsub("/$", "") -- Remove trailing slash
-  
-  local found = false
-  for i, d in ipairs(history) do
-    if d == dir then
-      found = true
-      -- Move to the front of the list
-      table.remove(history, i)
-      table.insert(history, 1, dir)
-      break
+-- Normalize path for comparison
+local function normalize_path(path)
+  path = vim.fn.fnamemodify(path, ":p")
+  path = path:gsub("\\", "/"):gsub("/+", "/"):gsub("/$", "")
+  return path
+end
+
+-- Check if path exists in history
+local function path_in_history(path)
+  local normalized_path = normalize_path(path)
+  for _, dir in ipairs(history) do
+    if normalize_path(dir) == normalized_path then
+      return true
     end
   end
+  return false
+end
 
-  if not found then
-    table.insert(history, 1, dir)
+-- Add directory to history
+local function add_to_history(dir)
+  -- Don't add if already in history
+  if path_in_history(dir) then
+    return
   end
+
+  -- Add to beginning of history
+  table.insert(history, 1, normalize_path(dir))
 
   -- Limit history size (e.g., to 100 entries)
   if #history > 100 then
@@ -97,6 +104,9 @@ local function jump(query)
       format_item = function(item)
         return vim.fn.fnamemodify(item, ":~")
       end,
+      kind = "selector",
+      -- Set fixed height (maximum 15 items, but won't exceed window height)
+      size = math.min(15, #results, vim.o.lines - 5),
     }, function(choice)
       if choice then
         vim.cmd("cd " .. vim.fn.fnameescape(choice))
@@ -115,7 +125,10 @@ end, { nargs = "?", complete = "dir" })
 vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged" }, {
   callback = function()
     local current_dir = vim.fn.getcwd()
-    add_to_history(current_dir)
+    -- Only add if not already in history
+    if not path_in_history(current_dir) then
+      add_to_history(current_dir)
+    end
   end,
 })
 

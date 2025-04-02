@@ -39,3 +39,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   vim.api.nvim_set_hl(0, "StatusLineNC", {
     fg = gruvbox_fg_aqua,
   })
+-- modification
+vim.opt.laststatus = 2
+vim.opt.ruler = true
