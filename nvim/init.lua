@@ -5,16 +5,10 @@ require("keybindings")
 require("statusline.theme")
 require("statusline.style")
 require("startup")
-require("bufshift")
-require("tree")
+require("plugins.bufshift")
+require("plugins.tree")
 require("scope")
 -- Initialize the completion system
-local completation = require('completation')  -- Save the above code as lua/completion.lua
- completation.setup()
-
-vim.keymap.set('n', '<leader>ff', function() require('scope').find_files_and_display() end)
-vim.keymap.set('n', '<leader>fh', function() require('scope').find_files_and_display({ hidden = true }) end)
-vim.keymap.set('n', '<leader>fp', function() require('scope').find_files_and_display({ pattern = "*.py" }) end)
 -- Line Numbers
 vim.opt.number = true
 vim.opt.fillchars = { eob = " " }
@@ -72,3 +66,7 @@ vim.opt.shellpipe = "| pwsh.exe -NoLogo -ExecutionPolicy Bypass -Command"
 vim.opt.shellquote = "\""
 vim.opt.shellxquote = "\""
 
+-- init.lua
+
+vim.api.nvim_set_keymap("n", "<leader>ff", ":lua require('scope').find_files()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>fb", ":lua require('scope').switch_buffer()<CR>", { noremap = true, silent = true })
