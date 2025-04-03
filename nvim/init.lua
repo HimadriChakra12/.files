@@ -8,6 +8,9 @@ require("startup")
 require("bufshift")
 require("tree")
 require("scope")
+-- Initialize the completion system
+local completation = require('completation')  -- Save the above code as lua/completion.lua
+ completation.setup()
 
 vim.keymap.set('n', '<leader>ff', function() require('scope').find_files_and_display() end)
 vim.keymap.set('n', '<leader>fh', function() require('scope').find_files_and_display({ hidden = true }) end)
@@ -68,3 +71,4 @@ vim.opt.shellredir = ">%s 2>&1"
 vim.opt.shellpipe = "| pwsh.exe -NoLogo -ExecutionPolicy Bypass -Command"
 vim.opt.shellquote = "\""
 vim.opt.shellxquote = "\""
+
