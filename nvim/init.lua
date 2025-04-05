@@ -1,13 +1,20 @@
-require("plugins.zoxvim")
-require("plugins.ff")
-require("plugins.cmp")
+require("scope")
 require("keybindings")
+
 require("statusline.theme")
 require("statusline.style")
-require("startup")
+
+require("plugins.zoxvim").setup()
+require("plugins.shell")
+require("plugins.ff")
+require("plugins.startup")
+require('plugins.pcmp').setup()
 require("plugins.bufshift")
-require("plugins.tree")
-require("scope")
+require("plugins.explorer")
+-- require("plugins.tree")
+
+
+
 -- Initialize the completion system
 -- Line Numbers
 vim.opt.number = true
@@ -58,15 +65,4 @@ vim.opt.termguicolors = true  -- Enable 24-bit colors
 vim.opt.background = "dark"   -- Set to dark mode
 vim.cmd("colorscheme gruvbox")  -- Load Gruvbox
 
--- pwsh
-vim.opt.shell = "pwsh.exe"
-vim.opt.shellcmdflag = "-NoLogo -ExecutionPolicy Bypass -Command"
-vim.opt.shellredir = ">%s 2>&1"
-vim.opt.shellpipe = "| pwsh.exe -NoLogo -ExecutionPolicy Bypass -Command"
-vim.opt.shellquote = "\""
-vim.opt.shellxquote = "\""
 
--- init.lua
-
-vim.api.nvim_set_keymap("n", "<leader>ff", ":lua require('scope').find_files()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>fb", ":lua require('scope').switch_buffer()<CR>", { noremap = true, silent = true })
