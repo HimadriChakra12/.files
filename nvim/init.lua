@@ -1,68 +1,37 @@
-require("scope")
-require("keybindings")
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
+vim.g.mapleader = " "
 
-require("statusline.theme")
-require("statusline.style")
+-- bootstrap lazy and all plugins
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
-require("plugins.zoxvim").setup()
-require("plugins.shell")
-require("plugins.ff")
-require("plugins.startup")
-require('plugins.pcmp').setup()
-require("plugins.bufshift")
-require("plugins.explorer")
--- require("plugins.tree")
+if not vim.uv.fs_stat(lazypath) then
+  local repo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
+end
 
+vim.opt.rtp:prepend(lazypath)
 
+local lazy_config = require "configs.lazy"
 
--- Initialize the completion system
--- Line Numbers
-vim.opt.number = true
-vim.opt.fillchars = { eob = " " }
-vim.opt.relativenumber = true
+-- load plugins
+require("lazy").setup({
+  {
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
+  },
 
--- Better searching
-vim.opt.incsearch = true
-vim.opt.hlsearch = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true  -- Makes search case-sensitive if uppercase letters are used
+  { import = "plugins" },
+}, lazy_config)
 
-vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>z", ":Z<CR>", { noremap = true, silent = true })
+-- load theme
+dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "statusline")
 
--- Faster Keypress
-vim.opt.updatetime = 300
-vim.opt.timeoutlen = 500
+require "options"
+require "nvchad.autocmds"
 
--- Tabs and Indent
-vim.opt.expandtab = true  -- Convert tabs to spaces
-vim.opt.tabstop = 4       -- Number of spaces a tab counts for
-vim.opt.shiftwidth = 4    -- Number of spaces for autoindent
-vim.opt.softtabstop = 4
-vim.opt.autoindent = true
-vim.opt.smartindent = true
-
--- No Annoy
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.writebackup = false
-
--- Yanked Text
-vim.cmd [[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup="IncSearch", timeout=200 }
-  augroup END
-]]
-
--- TP BG
--- vim.cmd([[highlight Normal guibg=NONE ctermbg=NONE]])
--- vim.cmd([[highlight NonText guibg=NONE ctermbg=NONE]])
--- vim.cmd([[highlight NormalNC guibg=NONE ctermbg=NONE]])
--- vim.cmd([[highlight EndOfBuffer guibg=NONE ctermbg=NONE]])
-
-vim.opt.termguicolors = true  -- Enable 24-bit colors
-vim.opt.background = "dark"   -- Set to dark mode
-vim.cmd("colorscheme gruvbox")  -- Load Gruvbox
-
-
+vim.schedule(function()
+  require "mappings"
+end)
