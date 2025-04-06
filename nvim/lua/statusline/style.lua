@@ -65,7 +65,7 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufAdd", "BufDelete"}, {
 -- Initialize the buffer list
 update_buffers()
 
-vim.opt.statusline = "| %{toupper(mode())} | %{luaeval('get_buffers()')}%=  |%#LineNr# %y %m %p%% %#StatusLineMode#" .. get_git_branch() .. get_git_status() ..  "%#StatusLine# [%L:%c]"
+vim.opt.statusline = "| %{toupper(mode())} | %{luaeval('get_buffers()')}%=  |%#LineNr# %y %m %p%% %#StatusLineMode#" .. get_git_branch() .. get_git_status() ..  "%#StatusLine# [%l:%L:%c]"
 
 _G.get_buffers = get_buffers
 -- Hide the default mode indicators (-- INSERT --, -- VISUAL -- etc.)

@@ -15,8 +15,6 @@ keymap("n", "<Leader>w", ":w<CR>", opts)
 keymap("n", "<Leader>q", ":q!<CR>", opts)
 keymap("n", "<Leader>x", ":x<CR>", opts)
 
-vim.api.nvim_set_keymap("n", "<leader>ff", ":lua require('scope').find_files()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>fb", ":lua require('scope').switch_buffer()<CR>", { noremap = true, silent = true })
 -- ... (Your existing statusline and buffer list code) ...
 -- Keymap to manually trigger the statusline update
 vim.keymap.set("n", "<leader>rs", function()
@@ -29,3 +27,9 @@ vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { noremap = true, silent = t
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>z", ":Z<CR>", { noremap = true, silent = true })
 -- ... (Your existing autocommands and other keymaps) ...
+-- vim.api.nvim_set_keymap("n", "<leader>ff", ":FF<CR>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>')
+
+vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>z", ":Z<CR>", { noremap = true, silent = true })

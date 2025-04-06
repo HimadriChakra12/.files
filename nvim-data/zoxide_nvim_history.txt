@@ -1,0 +1,10 @@
+C:/Users/Him/AppData/Local/nvim|30|1743903580
+C:/Users/Him/AppData/Local|1|1743903299
+C:/Users/Him/AppData/Local/nvim/lua|48|1743903241
+C:/Users/Him/AppData/Local/nvim/lua/plugins|13|1743903240
+C:/Users/Him/appdata/local/nvim|1|1743902684
+C:/Users/Him|9|1743902574
+C:/Users/Him/AppData/Roaming/.emacs.d|4|1743866616
+C:/Users/Him/AppData/Local/nvim/lua/statusline|2|1743875158
+C:/Program Files/Neovim/bin|2|1743852101
+C:/Users/Him/AppData/Local/nvim/colors|1|1743865398

@@ -4,8 +4,8 @@ local M = {}
 
 -- Default configuration with VSCode-like styling
 local config = {
-  width = 0.6,  -- 30% of editor width (more like VSCode)
-  height = 0.5, -- 80% of editor height
+  width = 0.2,  -- 30% of editor width (more like VSCode)
+  height = 0.7, -- 80% of editor height
   border = 'single',
   title = "   Explorer   ",
   title_pos = "center",
@@ -45,7 +45,7 @@ local function get_colors()
   -- Fallback to VSCode-like colors
   if bg == "" then bg = "#1e1e1e" end       -- Dark editor background
   if fg == "" then fg = "#d4d4d4" end       -- Default text color
-  if border == "" then border = "#454545" end -- Subtle border
+  if border == "" then border = "#ebdbb2" end -- Subtle border
 
   return {
     bg = bg,

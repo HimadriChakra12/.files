@@ -5,10 +5,10 @@ local history = {}
 
 -- Configuration
 local config = {
-  width = 0.6,
-  height = 0.6,
+  width = 0.3,
+  height = 0.4,
   border = "rounded",
-  title = "Directory Jump",
+  title = "  Zoxvim  ",
   sort_by = "frecency", -- "frecency", "recent", "frequency"
   max_history = 100,
   show_usage = true,    -- Show usage frequency indicators
@@ -158,7 +158,6 @@ end
 -- Create popup window
 local function create_popup(results, query)
   local colors = get_theme_colors()
-  local buf = vim.api.nvim_create_buf(false, true)
   local width = math.floor(vim.o.columns * config.width)
   local height = math.floor(vim.o.lines * config.height)
   local col = math.floor((vim.o.columns - width) / 2)
