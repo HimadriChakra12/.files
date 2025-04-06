@@ -101,7 +101,7 @@ function M.open()
 
   -- Create a scratch buffer for the file explorer
   local buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_name(buf, "ex")
+  vim.api.nvim_buf_set_name(buf, "")
 
   -- Set buffer options
   vim.api.nvim_buf_set_option(buf, 'buftype', 'nofile')

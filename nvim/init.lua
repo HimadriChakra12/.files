@@ -3,7 +3,7 @@ require("keybindings")
 
 -- /pack/..
 require('telescope').setup{}
-require("telescope").load_extension('zoxide')
+-- require("telescope").load_extension('zoxide')
 -- require('cmp').setup{}
 
 -- /lua/statusline..
@@ -16,13 +16,12 @@ require("plugins.startup")
 require('plugins.pcmp').setup()
 require("plugins.bufshift")
 require("plugins.explorer")
+require("plugins.zoxvim").setup() 
 
-
--- require("plugins.zoxvim").setup() 
 -- require("plugins.ff") [Replaced by telescope.nvim]
 -- require("plugins.tree") [Replaced with explorer.lua]
 -- require("scope").setup() [Replaced with telescope.nvim]
-vim.keymap.set("n", "<leader>cd", require("telescope").extensions.zoxide.list)
+-- vim.keymap.set("n", "<leader>cd", require("telescope").extensions.zoxide.list)
 -- Line Numbers
 vim.opt.number = true
 vim.opt.relativenumber = true

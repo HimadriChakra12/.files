@@ -158,6 +158,7 @@ end
 -- Create popup window
 local function create_popup(results, query)
   local colors = get_theme_colors()
+  local buf = vim.api.nvim_create_buf(false, true)
   local width = math.floor(vim.o.columns * config.width)
   local height = math.floor(vim.o.lines * config.height)
   local col = math.floor((vim.o.columns - width) / 2)
@@ -364,7 +365,7 @@ function M.setup(user_config)
 end
 
 -- Nvim command to jump
-vim.api.nvim_create_user_command("Z", function(args)
+vim.api.nvim_create_user_command("Zd", function(args)
   jump(args.args)
 end, { nargs = "?", complete = "dir" })
 
