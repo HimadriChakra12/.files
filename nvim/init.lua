@@ -1,10 +1,9 @@
 -- /lua/..
-require("keybindings")
-
+require('keybindings')
 -- /pack/..
 require('telescope').setup{}
--- require("telescope").load_extension('zoxide')
--- require('cmp').setup{}
+-- require('lspconfig').setup{}
+-- require('plugins.lsp0').setup{}
 
 -- /lua/statusline..
 require("statusline.theme")
@@ -13,15 +12,19 @@ require("statusline.style")
 -- /lua/plugins..
 require("plugins.shell")
 require("plugins.startup")
+require('plugins.coderunner')
 require('plugins.pcmp').setup()
 require("plugins.bufshift")
 require("plugins.explorer")
 require("plugins.zoxvim").setup() 
+require("plugins.termim") 
 
+-- require("config.lazy")
 -- require("plugins.ff") [Replaced by telescope.nvim]
 -- require("plugins.tree") [Replaced with explorer.lua]
 -- require("scope").setup() [Replaced with telescope.nvim]
 -- vim.keymap.set("n", "<leader>cd", require("telescope").extensions.zoxide.list)
+
 -- Line Numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
