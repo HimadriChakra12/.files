@@ -15,9 +15,10 @@ require("startups.startup4")
 require('plugins.pcmp').setup()
 require("plugins.bufshift")
 require("plugins.explorer")
-require("plugins.zoxvim").setup() 
+require("plugins.zox").setup() 
 require("plugins.termim") 
 
+-- require("plugins.zoxvim").setup() --[Replaced with zox.lua]
 -- require("plugins.ff") [Replaced by telescope.nvim]
 -- require("plugins.tree") [Replaced with explorer.lua]
 -- require("scope").setup() [Replaced with telescope.nvim]

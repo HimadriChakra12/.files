@@ -18,13 +18,13 @@ local function show_dashboard()
     local header = {
       "",
       "",
-      "   ███    ███ ███",
-      "    ██    ██    ███    █████       ██   ████",
-      "     ██   ██     ████     ██       ██   ██",
-      "      ██ ██    ███  ███   ██  ████ ██   ██",
-      "       ███    ███     ███  █████   ██   ██",
-      "                                   █████",
-      "                                   ██",
+      "   ██    ███   ████",
+      "   ██   ████     ████    █████     ██   ████",
+      "   ██  ██ ██      ███     ██       ██   ██",
+      "   ████   ██   ████  ██   ██  ████ ██   ██",
+      "   ██     ██  ██     ███  █████    ██   ██",
+      "          ███                      █████",
+      "           ████  ███████████████   ██",
       "                                   ██",
       "",
       "                     Neovim " .. vim.version().major .. "." .. vim.version().minor,
@@ -36,7 +36,7 @@ local function show_dashboard()
     local oldfiles = vim.v.oldfiles
     local counter = 1
     for i = 1, #oldfiles do
-      if counter > 10 then break end
+      if counter > 9 then break end
       local file = oldfiles[i]
       if vim.fn.filereadable(file) == 1 then
         local ext = file:match("^.+(%..+)$") or ""

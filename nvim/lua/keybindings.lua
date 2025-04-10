@@ -22,11 +22,12 @@ vim.keymap.set('n', '<leader>n', ':enew<CR>', { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { noremap = true, silent = true })
 
 -- vim.api.nvim_set_keymap("n", "<leader>ff", ":FF<CR>", { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>o', ':Telescope find_files<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>')
+vim.keymap.set('n', '<leader><leader>', ':Telescope find_files<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>g', ':Telescope live_grep<CR>')
 vim.keymap.set('n', '<leader><tab>', '<cmd>Telescope buffers<cr>', { desc = 'Find existing buffers' })
 
-vim.keymap.set("n", "<leader>z", ":Zd<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>z", ":Zcd ", { noremap = true})
+vim.keymap.set("n", "<leader><leader>z", ":Zt<CR>", { noremap = true, silent = true })
 -- Option 1: Mapping to Clear Highlighting (e.g., <CR> after search)
 vim.api.nvim_set_keymap('n', '<CR>', ':noh<CR>', { noremap = true, silent = true })
 
