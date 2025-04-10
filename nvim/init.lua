@@ -11,15 +11,13 @@ require("statusline.style")
 
 -- /lua/plugins..
 require("plugins.shell")
-require("plugins.startup")
-require('plugins.coderunner')
+require("startups.startup4")
 require('plugins.pcmp').setup()
 require("plugins.bufshift")
 require("plugins.explorer")
 require("plugins.zoxvim").setup() 
 require("plugins.termim") 
 
--- require("config.lazy")
 -- require("plugins.ff") [Replaced by telescope.nvim]
 -- require("plugins.tree") [Replaced with explorer.lua]
 -- require("scope").setup() [Replaced with telescope.nvim]
