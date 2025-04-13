@@ -4,9 +4,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
         if vim.bo.filetype == "" then
 local function display_startup()
   local lines = {
-    "νλιμ",
+    "",
 }
--- [u] New File   [h] Help   [q] Quit
+--νλιμ [u] New File   [h] Help   [q] Quit
   for _, line in ipairs(lines) do
     vim.api.nvim_echo({{line, ""}}, true, {})
   end

@@ -129,6 +129,7 @@ function M.zcd(query)
     vim.cmd("cd " .. vim.fn.fnameescape(dir))
     update_history(dir)
     save_history()
+    vim.cmd("pwd")
   else
     vim.notify("No matches", vim.log.levels.WARN)
   end

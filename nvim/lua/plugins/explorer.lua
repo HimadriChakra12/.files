@@ -5,9 +5,9 @@ local M = {}
 -- Default configuration with VSCode-like styling
 local config = {
   width = 0.2,  -- 30% of editor width (more like VSCode)
-  height = 0.7, -- 80% of editor height
+  height = 0.3, -- 80% of editor height
   border = 'single',
-  title = "  Explorer    ",
+  title = "  Explorer  ",
   title_pos = "center",
   dynamic_colors = true,
   bg_color = nil,
@@ -96,8 +96,8 @@ function M.open()
   -- Calculate dimensions
   local width = math.floor(vim.o.columns * config.width)
   local height = math.floor(vim.o.lines * config.height)
-  local col = math.floor((vim.o.columns - width) / 2) -- Center horizontally
-  local row = math.floor((vim.o.lines - height) / 2)  -- Center vertically
+  local col = math.floor((vim.o.columns - width) / 1) -- Center horizontally
+  local row = math.floor((vim.o.lines - height) / 1)  -- Center vertically
 
   -- Create a scratch buffer for the file explorer
   local buf = vim.api.nvim_create_buf(false, true)

@@ -1,12 +1,13 @@
 local function show_dashboard()
   if vim.fn.argc() == 0 and vim.fn.line2byte('$') == -1 then
     -- Clear default intro silently
-    vim.cmd('silent! echo ""')
 
     -- Define color highlight groups
     vim.cmd([[
-      highlight! DashboardHeader guifg=#569CD6 ctermfg=75
-      highlight! DashboardLuaFile guifg=#569CD6 ctermfg=75
+      highlight! DashboardHeader guifg=#b8bb26 ctermfg=75
+      highlight! DashboardLuaFile guifg=#fb4934 ctermfg=75
+      highlight! DashboardCFile guifg=#35b8c5 ctermfg=75
+      highlight! DashboardPsFile guifg=#83a597 ctermfg=75
       highlight! DashboardPythonFile guifg=#FFD43B ctermfg=220
       highlight! DashboardTextFile guifg=#A6E3A1 ctermfg=114
       highlight! DashboardConfigFile guifg=#CBA6F7 ctermfg=183
@@ -27,8 +28,13 @@ local function show_dashboard()
       "           ████  ███████████████   ██",
       "                                   ██",
       "",
-      "                     Neovim " .. vim.version().major .. "." .. vim.version().minor,
+      "                  Neovim " .. vim.version().major .. "." .. vim.version().minor,
       "",
+      "",
+      "  [e] Open Init.lua",
+      "  [o],[Enter] Open the file.",
+      "",
+    
     }
 
     -- Get recent files (last 10 accessible files)
@@ -45,6 +51,8 @@ local function show_dashboard()
         if ext == ".py" then color_group = "DashboardPythonFile"
         elseif ext == ".md" or ext == ".txt" then color_group = "DashboardTextFile"
         elseif ext == ".json" or ext == ".yaml" or ext == ".yml" then color_group = "DashboardConfigFile"
+        elseif ext == ".c" or ext == ".cpp" or ext == ".cs" then color_group = "DashboardCFile"
+        elseif ext == ".ps1" then color_group = "DashboardPsFile"
         end
         
         table.insert(recent_files, {
@@ -59,11 +67,7 @@ local function show_dashboard()
     -- Footer with commands
     local footer = {
       "",
-      "  Commands:",
-      "  <1-9>     - Open recent file by number",
-      "  gf        - Open file under cursor",
-      "  <Enter>   - Open help",
-      "  q         - Quit",
+      "  [n]ew File [h]elp [q]uit",
       "",
     }
 
@@ -74,6 +78,8 @@ local function show_dashboard()
     vim.api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
     vim.api.nvim_buf_set_option(buf, 'swapfile', false)
     vim.api.nvim_buf_set_option(buf, 'filetype', 'dashboard')
+    vim.api.nvim_buf_set_option(buf, 'number', false) -- Turn off line numbers
+    vim.api.nvim_buf_set_option(buf, 'relativenumber', false) -- Turn off relative numbers
 
     -- Build content
     local content = vim.list_extend({}, header)
@@ -110,7 +116,7 @@ local function show_dashboard()
 
     -- Display buffer
     vim.api.nvim_set_current_buf(buf)
-    vim.api.nvim_win_set_cursor(0, {17, 6})  -- Position cursor at line 14, column 7
+    vim.api.nvim_win_set_cursor(0, {21, 6})  -- Position cursor at line 14, column 7
 
     -- Key mappings
     local opts = { buffer = buf, silent = true, nowait = true }
@@ -125,7 +131,14 @@ local function show_dashboard()
     end
     
     -- gf to open file under cursor
-    vim.keymap.set('n', 'gf', function()
+    vim.keymap.set('n', 'o', function()
+      local line = vim.api.nvim_get_current_line()
+      local path = line:match('%[(.*)%]')
+      if path and vim.fn.filereadable(path) == 1 then
+        vim.cmd('edit ' .. vim.fn.fnameescape(path))
+      end
+    end, opts)
+    vim.keymap.set('n', '<Enter>', function()
       local line = vim.api.nvim_get_current_line()
       local path = line:match('%[(.*)%]')
       if path and vim.fn.filereadable(path) == 1 then
@@ -133,7 +146,11 @@ local function show_dashboard()
       end
     end, opts)
     
-    vim.keymap.set('n', '<Enter>', ':help<CR>', opts)
+    vim.api.nvim_buf_set_option(buf, "number", false)
+    vim.api.nvim_buf_set_option(buf, "relativenumber", false)
+    vim.keymap.set('n', 'n', ':enew<CR>', opts)
+    vim.keymap.set('n', 'e', ':edit $MYVIMRC<CR>', opts)
+    vim.keymap.set('n', 'h', ':help<CR>', opts)
     vim.keymap.set('n', 'q', ':q<CR>', opts)
   end
 end

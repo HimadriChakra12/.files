@@ -1,26 +1,28 @@
 -- /lua/..
 require('keybindings')
+require('netwr')
 -- /pack/..
 require('telescope').setup{}
 -- require('lspconfig').setup{}
 -- require('plugins.lsp0').setup{}
+require('yazi').setup()
 
 -- /lua/statusline..
 require("statusline.theme")
 require("statusline.style")
 
+require("startups.startup4")
 -- /lua/plugins..
 require("plugins.shell")
-require("startups.startup4")
 require('plugins.pcmp').setup()
 require("plugins.bufshift")
-require("plugins.explorer")
+require("plugins.tree") --[Replaced with explorer.lua]
 require("plugins.zox").setup() 
 require("plugins.termim") 
 
 -- require("plugins.zoxvim").setup() --[Replaced with zox.lua]
 -- require("plugins.ff") [Replaced by telescope.nvim]
--- require("plugins.tree") [Replaced with explorer.lua]
+-- require("plugins.explorer")
 -- require("scope").setup() [Replaced with telescope.nvim]
 -- vim.keymap.set("n", "<leader>cd", require("telescope").extensions.zoxide.list)
 

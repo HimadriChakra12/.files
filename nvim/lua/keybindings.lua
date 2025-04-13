@@ -16,23 +16,22 @@ keymap("n", "<leader>w", ":bd<CR>", opts)
 -- keymap("n", "<Leader>qq", ":q!<CR>", opts)
 keymap("n", "<Leader>x", ":x<CR>", opts)
 
-
-vim.keymap.set('n', '<leader>e', '<cmd>Explorer<cr>')
+-- For Lua (init.lua)
+vim.keymap.set('n', '<leader>e', '<cmd>NetrwPopup<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<leader>e', '<cmd>Explorer<cr>')
 vim.keymap.set('n', '<leader>n', ':enew<CR>', { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { noremap = true, silent = true })
 
 -- vim.api.nvim_set_keymap("n", "<leader>ff", ":FF<CR>", { noremap = true, silent = true })
 vim.keymap.set('n', '<leader><leader>', ':Telescope find_files<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>g', ':Telescope live_grep<CR>')
-vim.keymap.set('n', '<leader><tab>', '<cmd>Telescope buffers<cr>', { desc = 'Find existing buffers' })
+vim.keymap.set('n', '<leader>g', ':Telescope live_grep<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader><tab>', '<cmd>Telescope buffers<cr>', { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>z", ":Zcd ", { noremap = true})
-vim.keymap.set("n", "<leader><leader>z", ":Zt<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>.", ":Zt<CR>", { noremap = true, silent = true })
 -- Option 1: Mapping to Clear Highlighting (e.g., <CR> after search)
 vim.api.nvim_set_keymap('n', '<CR>', ':noh<CR>', { noremap = true, silent = true })
 
--- Option 2: Mapping to a Specific Key (e.g., <Esc> twice)
-vim.api.nvim_set_keymap('n', '<Esc><Esc>', ':noh<CR>', { noremap = true, silent = true })
 
 -- Option 3: Mapping to a Custom Key (e.g., <Leader>h)
 vim.api.nvim_set_keymap('n', '<Leader>h', ':noh<CR>', { noremap = true, silent = true })
@@ -42,6 +41,9 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
   pattern = "*",
   command = "noh",
 })
+
+vim.keymap.set('n', '<leader>yz', ':Yazi<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>y', '<cmd>Yazi Toggle<cr>', { noremap = true, silent = true })
 
 -- Keybindings configuration
 vim.keymap.set('n', '<leader><CR>', ':TerminalPopup<CR>', {silent = true, desc = 'Toggle Terminal Popup' })
