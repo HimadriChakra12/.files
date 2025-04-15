@@ -53,7 +53,7 @@ local function get_buffers()
   for _, buf in ipairs(buffer_list) do
     table.insert(parts, buf.current and ("[%s]"):format(buf.name) or buf.name)
   end
-  return table.concat(parts, " ")
+  return table.concat(parts, "/")
 end
 
 -- Set up autocmds to update buffers
@@ -65,7 +65,7 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufAdd", "BufDelete"}, {
 -- Initialize the buffer list
 update_buffers()
 
-vim.opt.statusline = "| %{toupper(mode())} | %{luaeval('get_buffers()')}%=  |%#LineNr# %y %m %p%% %#StatusLineMode#" .. get_git_branch() .. get_git_status() ..  " %#StatusLine# [%l:%L:%c]"
+vim.opt.statusline = "[%{toupper(mode())}] | %{luaeval('get_buffers()')}%=  |%#LineNr# %y %m %p%% %#StatusLineMode#" .. get_git_branch() .. get_git_status() ..  " %#StatusLine# %l:%L:%c  "
 
 _G.get_buffers = get_buffers
 -- Hide the default mode indicators (-- INSERT --, -- VISUAL -- etc.)

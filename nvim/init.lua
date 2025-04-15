@@ -12,6 +12,7 @@ require("statusline.theme")
 require("statusline.style")
 
 require("startups.startup4")
+require("startups.startup1")
 -- /lua/plugins..
 require("plugins.shell")
 require('plugins.pcmp').setup()
