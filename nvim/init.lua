@@ -3,13 +3,49 @@ require('keybindings')
 require('netwr')
 -- /pack/..
 require('telescope').setup{}
--- require('lspconfig').setup{}
--- require('plugins.lsp0').setup{}
 require('yazi').setup()
+require('packer.packer')
+
+require("buffer-manager").setup({
+    icons = true,
+    use_devicons = true,
+    default_mappings = true,
+    window = {
+        width = 0.5,
+        height = 0.6,
+        border = "rounded",
+        preview_width = 0.5,
+    },
+    style = {
+        numbers = "ordinal", -- or "none"
+        modified_icon = "●",
+        current_icon = "",
+        path_style = "shorten", -- "filename", "relative", "absolute", "shorten"
+    },
+    mappings = {
+        open = "<leader><leader>",
+        vertical = "<leader>bv",
+        horizontal = "<leader>bs",
+        delete = "<leader>bd",
+        delete_force = "<leader>bD",
+    },
+    sessions = {
+        enabled = false,
+        auto_save = true,
+        session_dir = vim.fn.stdpath("data") .. "/buffer-manager-sessions",
+        session_file = "session.json",
+        indicator_icon = "󱡅",
+    },
+    preview = {
+        enabled = true,
+        type = "lf",
+    }
+})
+
 
 -- /lua/statusline..
-require("statusline.theme")
-require("statusline.style")
+require("status.theme")
+require("status.style")
 
 require("startups.startup4")
 require("startups.startup1")
@@ -17,7 +53,8 @@ require("startups.startup1")
 require("plugins.shell")
 require('plugins.pcmp').setup()
 require("plugins.bufshift")
-require("plugins.tree") --[Replaced with explorer.lua]
+-- require("plugins.tree") --[Replaced with explorer.lua]
+require("plugins.explo")
 require("plugins.zox").setup() 
 require("plugins.termim") 
 

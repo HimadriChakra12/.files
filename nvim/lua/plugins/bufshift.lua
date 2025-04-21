@@ -41,3 +41,13 @@ vim.keymap.set("n", "<S-Tab>", function() cycle_buffers(-1) end, { desc = "Previ
 -- Example usage in nvim:
 -- <Tab> to cycle forward
 -- <Shift+Tab> to cycle backward
+
+vim.keymap.set('n', '<leader>1', ':buffer 1<CR>',{ desc = 'Go to buffer 1', silent = true })
+vim.keymap.set('n', '<leader>2', ':buffer 2<CR>',{ desc = 'Go to buffer 2', silent = true })
+vim.keymap.set('n', '<leader>3', ':buffer 3<CR>',{ desc = 'Go to buffer 3', silent = true })
+vim.keymap.set('n', '<leader>4', ':buffer 4<CR>',{ desc = 'Go to buffer 4', silent = true })
+vim.keymap.set('n', '<leader>5', ':buffer 5<CR>',{ desc = 'Go to buffer 5', silent = true })
+vim.keymap.set('n', '<leader>6', ':buffer 6<CR>',{ desc = 'Go to buffer 6', silent = true })
+vim.keymap.set('n', '<leader>7', ':buffer 7<CR>',{ desc = 'Go to buffer 7', silent = true })
+vim.keymap.set('n', '<leader>8', ':buffer 8<CR>',{ desc = 'Go to buffer 8', silent = true })
+vim.keymap.set('n', '<leader>9', ':buffer 9<CR>',{ desc = 'Go to buffer 9', silent = true })

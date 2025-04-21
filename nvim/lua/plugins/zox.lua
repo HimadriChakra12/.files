@@ -165,6 +165,7 @@ function M.zt(query)
           vim.cmd("cd " .. vim.fn.fnameescape(entry.value))
           update_history(entry.value)
           save_history()
+          vim.cmd("pwd")
         end
       end)
       return true
