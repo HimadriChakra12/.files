@@ -31,7 +31,7 @@ require("buffer-manager").setup({
     },
     sessions = {
         enabled = false,
-        auto_save = true,
+        auto_save = false,
         session_dir = vim.fn.stdpath("data") .. "/buffer-manager-sessions",
         session_file = "session.json",
         indicator_icon = "󱡅",
@@ -41,8 +41,6 @@ require("buffer-manager").setup({
         type = "lf",
     }
 })
-
-
 -- /lua/statusline..
 require("status.theme")
 require("status.style")

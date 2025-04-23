@@ -89,13 +89,19 @@ _G.packer_plugins = {
     url = "https://github.com/w0rp/ale"
   },
   ["buffer-manager"] = {
-    config = { "\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19buffer-manager\frequire\0" },
+    config = { "\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19buffer-manager\frequire\0" },
     loaded = true,
     path = "C:\\Users\\Him\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\buffer-manager",
     url = "https://github.com/xsoder/buffer-manager"
   },
+  ["cmdline.nvim"] = {
+    config = { "\27LJ\2\n¸\2\0\0\4\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\0025\3\n\0=\3\v\2B\0\2\1K\0\1\0\nbinds\1\0\2\tnext\n<Tab>\tback\f<S-Tab>\vcolumn\1\0\2\14maxNumber\3\6\rminWidth\3\20\ahl\1\0\4\14directory\14Directory\vsubstr\vLineNr\14selection\rPmenuSel\fdefault\nPmenu\vwindow\1\0\3\15debounceMs\3\n\voffset\3\1\15matchFuzzy\2\1\0\5\nbinds\0\vcolumn\0\fcmdtype\6:\ahl\0\vwindow\0\nsetup\fcmdline\frequire\0" },
+    loaded = true,
+    path = "C:\\Users\\Him\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmdline.nvim",
+    url = "https://github.com/vzze/cmdline.nvim"
+  },
   ["completion-nvim"] = {
-    after = { "vim-vsnip-integ", "vim-vsnip" },
+    after = { "vim-vsnip", "vim-vsnip-integ" },
     loaded = false,
     needs_bufread = false,
     path = "C:\\Users\\Him\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\completion-nvim",
@@ -110,6 +116,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\Him\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\firenvim",
     url = "https://github.com/glacambre/firenvim"
+  },
+  ["flash.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\Him\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\flash.nvim",
+    url = "https://github.com/folke/flash.nvim"
   },
   ["fzf-lua"] = {
     loaded = true,
@@ -195,14 +206,18 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: buffer-manager
+time([[Config for buffer-manager]], true)
+try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19buffer-manager\frequire\0", "config", "buffer-manager")
+time([[Config for buffer-manager]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
 time([[Config for gitsigns.nvim]], false)
--- Config for: buffer-manager
-time([[Config for buffer-manager]], true)
-try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19buffer-manager\frequire\0", "config", "buffer-manager")
-time([[Config for buffer-manager]], false)
+-- Config for: cmdline.nvim
+time([[Config for cmdline.nvim]], true)
+try_loadstring("\27LJ\2\n¸\2\0\0\4\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\0025\3\n\0=\3\v\2B\0\2\1K\0\1\0\nbinds\1\0\2\tnext\n<Tab>\tback\f<S-Tab>\vcolumn\1\0\2\14maxNumber\3\6\rminWidth\3\20\ahl\1\0\4\14directory\14Directory\vsubstr\vLineNr\14selection\rPmenuSel\fdefault\nPmenu\vwindow\1\0\3\15debounceMs\3\n\voffset\3\1\15matchFuzzy\2\1\0\5\nbinds\0\vcolumn\0\fcmdtype\6:\ahl\0\vwindow\0\nsetup\fcmdline\frequire\0", "config", "cmdline.nvim")
+time([[Config for cmdline.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
@@ -252,9 +267,9 @@ vim.cmd [[au FileType cmake ++once lua require("packer.load")({'ale'}, { ft = "c
 vim.cmd [[au FileType html ++once lua require("packer.load")({'ale'}, { ft = "html" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'ale'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType racket ++once lua require("packer.load")({'ale'}, { ft = "racket" }, _G.packer_plugins)]]
+vim.cmd [[au FileType tex ++once lua require("packer.load")({'ale'}, { ft = "tex" }, _G.packer_plugins)]]
 vim.cmd [[au FileType c ++once lua require("packer.load")({'ale'}, { ft = "c" }, _G.packer_plugins)]]
 vim.cmd [[au FileType vim ++once lua require("packer.load")({'ale'}, { ft = "vim" }, _G.packer_plugins)]]
-vim.cmd [[au FileType tex ++once lua require("packer.load")({'ale'}, { ft = "tex" }, _G.packer_plugins)]]
 vim.cmd [[au FileType sh ++once lua require("packer.load")({'ale'}, { ft = "sh" }, _G.packer_plugins)]]
 vim.cmd [[au FileType zsh ++once lua require("packer.load")({'ale'}, { ft = "zsh" }, _G.packer_plugins)]]
 vim.cmd [[au FileType bash ++once lua require("packer.load")({'ale'}, { ft = "bash" }, _G.packer_plugins)]]

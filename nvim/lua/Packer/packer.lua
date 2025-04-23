@@ -6,6 +6,42 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
+    
+    use {
+	    'vzze/cmdline.nvim',
+	    config = function()
+		    require('cmdline').setup({
+			    cmdtype = ":/", -- you can also add / and ? by using ":/?"
+			    -- as a string
+
+			    window = {
+				    matchFuzzy = true,
+				    offset     = 1,    -- depending on 'cmdheight' you might need to offset
+				    debounceMs = 10    -- the lower the number the more responsive however
+				    -- more resource intensive
+			    },
+
+			    hl = {
+				    default   = "Pmenu",
+				    selection = "PmenuSel",
+				    directory = "Directory",
+				    substr    = "LineNr"
+			    },
+
+			    column = {
+				    maxNumber = 6,
+				    minWidth  = 20
+			    },
+
+			    binds = {
+				    next = "<Tab>",
+				    back = "<S-Tab>"
+			    }
+		    })
+	    end
+    }
+  
+    use 'folke/flash.nvim'
 
     use {
         'xsoder/buffer-manager',
@@ -15,10 +51,9 @@ return require('packer').startup(function(use)
             'ibhagwan/fzf-lua', -- optional
         },
         config = function()
-            require('buffer-manager').setup()
+            require("buffer-manager")
         end
     }
-
     -- Simple plugins can be specified as strings
     use 'rstacruz/vim-closer'
 

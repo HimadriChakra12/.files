@@ -9,7 +9,9 @@ keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
+
 keymap("n", "<leader>w", ":bd<CR>", opts)
+keymap("n", "<leader>q", ":q!<CR>", opts)
 
 -- Fast saving & quitting
 -- keymap("n", "<Leader>w", ":w<CR>", opts)
@@ -26,7 +28,7 @@ vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { noremap = true, silent = t
 vim.keymap.set('n', '<leader>o', ':Telescope find_files<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>', { noremap = true, silent = true })
 
-vim.keymap.set('n', '<leader>gg', ':NeoGit<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>g', ':NeoGit<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gc', ':NeoGitCommit<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gP', ':NeoGitPull<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gp', ':NeoGitPush<CR>', { noremap = true, silent = true })
@@ -45,9 +47,6 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
   pattern = "*",
   command = "noh",
 })
-
-vim.keymap.set('n', '<leader>yz', ':Yazi<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>y', '<cmd>Yazi Toggle<cr>', { noremap = true, silent = true })
-
+vim.api.nvim_set_keymap('n', '<Leader>gfo', ':noh<CR>', { noremap = true, silent = true })
 -- Keybindings configuration
 vim.keymap.set('n', '<leader><CR>', ':TerminalPopup<CR>', {silent = true, desc = 'Toggle Terminal Popup' })

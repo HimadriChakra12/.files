@@ -9,6 +9,7 @@ local config = {
   max_history = 100,
   icon_style = "nerd",   -- nerd | emoji | none
   show_usage = true,
+  auto_clean_days = 7,   -- automatically clean entries not used in X days
 }
 
 -- Utilities
@@ -26,6 +27,23 @@ local function find_entry(path)
   return nil, nil
 end
 
+local function clean_old_entries()
+  local now = os.time()
+  local cutoff = now - (config.auto_clean_days * 24 * 60 * 60)
+  local new_history = {}
+  local seen_paths = {}
+  
+  for _, entry in ipairs(history) do
+    -- Only keep if used recently or path hasn't been seen yet
+    if entry.last_used > cutoff or not seen_paths[entry.path] then
+      table.insert(new_history, entry)
+      seen_paths[entry.path] = true
+    end
+  end
+  
+  history = new_history
+end
+
 local function update_history(path)
   local i, entry = find_entry(path)
   local now = os.time()
@@ -37,7 +55,13 @@ local function update_history(path)
     entry = { path = normalize_path(path), count = 1, last_used = now }
   end
   table.insert(history, 1, entry)
-  if #history > config.max_history then table.remove(history) end
+  
+  -- Clean old entries before enforcing max history
+  clean_old_entries()
+  
+  if #history > config.max_history then 
+    table.remove(history) 
+  end
 end
 
 local function save_history()
@@ -62,6 +86,9 @@ local function load_history()
     end
   end
   f:close()
+  
+  -- Clean old entries when loading history
+  clean_old_entries()
 end
 
 local function sort_history()
@@ -179,6 +206,30 @@ end
 function M.setup(user_config)
   config = vim.tbl_deep_extend("force", config, user_config or {})
   load_history()
+  
+  -- Add autocmd to clean periodically (once per day)
+  vim.api.nvim_create_autocmd({"VimEnter"}, {
+    callback = function()
+      local last_clean_file = vim.fn.stdpath("data") .. "/zox_last_clean.txt"
+      local last_clean = 0
+      local f = io.open(last_clean_file, "r")
+      if f then
+        last_clean = tonumber(f:read("*a")) or 0
+        f:close()
+      end
+      
+      local now = os.time()
+      if now - last_clean > 24 * 60 * 60 then -- 1 day
+        clean_old_entries()
+        save_history()
+        local f = io.open(last_clean_file, "w")
+        if f then
+          f:write(tostring(now))
+          f:close()
+        end
+      end
+    end,
+  })
 end
 
 vim.api.nvim_create_user_command("Zd", function(opts) M.zd(opts.args) end, { nargs = "?" })
