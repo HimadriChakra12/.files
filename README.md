@@ -8,3 +8,4 @@
 just remove the "local bg_color = vim.api.nvim_get_hl(0, { name = "Normal" }).bg" from the theme.lua
 
 ### NVIM-DATA is for Windows only: it will be at %LOCALAPPDATA%
+
