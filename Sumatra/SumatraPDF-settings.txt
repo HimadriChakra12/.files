@@ -1,9 +1,9 @@
 # For documentation, see https://www.sumatrapdfreader.org/settings/settings3-5-1.html
 Theme = Darker
 FixedPageUI [
-	TextColor = #000000
-	BackgroundColor = #ffffff
-	SelectionColor = #f5fc0c
+	TextColor = #ffffff
+	BackgroundColor = #000000
+	SelectionColor = #292828
 	WindowMargin = 2 4 2 4
 	PageSpacing = 4 4
 	InvertColors = false
@@ -12,7 +12,7 @@ FixedPageUI [
 ComicBookUI [
 	WindowMargin = 0 0 0 0
 	PageSpacing = 4 4
-	CbxMangaMode = false
+	CbxMangaMode = true
 ]
 ChmUI [
 	UseFixedPageUI = false
@@ -52,36 +52,64 @@ RememberOpenedFiles = false
 RememberStatePerDocument = true
 RestoreSession = true
 UiLanguage = en
-EnableTeXEnhancements = false
+EnableTeXEnhancements = true
 DefaultDisplayMode = automatic
 DefaultZoom = fit width
 Shortcuts [
+	[
+		Cmd = CmdCreateAnnotHighlight #00ff00 openedit
+		Key = v
+	]
+	[
+		Cmd = CmdTranslateSelectionWithGoogle
+		Key = G
+	]
+	[
+		Cmd = CmdScrollUpHalfPage
+		Key = Ctrl + u
+	]
+	[
+		Cmd = CmdScrollDownHalfPage
+		Key = Ctrl + d
+	]
+	[
+		Cmd = CmdScrollUpHalfPage
+		Key = b
+	]
+	[
+		Cmd = CmdFindMatch
+		Key = /
+	]
+	[
+		Cmd = CmdSaveAnnotations
+		Key = w
+	]
 ]
-EscToExit = false
-ReuseInstance = false
+EscToExit = true
+ReuseInstance = true
 ReloadModifiedDocuments = true
 
-MainWindowBackground = #292828
+MainWindowBackground = #ffffff
 FullPathInTitle = false
 ShowMenubar = false
 ShowToolbar = false
 ShowFavorites = false
-ShowToc = true
+ShowToc = false
 NoHomeTab = true
 TocDy = 0
-SidebarDx = 326
+SidebarDx = 400
 ToolbarSize = 18
 TabWidth = 300
 TreeFontSize = 0
 TreeFontWeightOffset = 0
 TreeFontName = automatic
 SmoothScroll = true
-ShowStartPage = true
+ShowStartPage = false
 CheckForUpdates = false
-WindowState = 1
+WindowState = 2
 WindowPos = 2 10 1596 858
 UseTabs = false
-UseSysColors = true
+UseSysColors = false
 CustomScreenDPI = 0
 
 FileStates [
